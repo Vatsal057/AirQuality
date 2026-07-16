@@ -1,0 +1,4 @@
+,Silhouette (Higher Better),Davies-Bouldin (Lower Better),Calinski-Harabasz (Higher Better)
+K-Means,0.3631958020956868,0.7979318290542382,10.752215682185948
+DBSCAN,0.0,999.0,0.0
+Hierarchical,0.3290267607681171,0.871005217987589,10.615541814740077
