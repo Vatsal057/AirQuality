@@ -1,0 +1,4 @@
+Model,N_Clusters,N_Noise_Points,Silhouette_Score,Davies_Bouldin_Index,Calinski_Harabasz_Score,Additional_Info
+K-Means,3,0,0.3836698192917349,0.812428321559523,11.927296722968126,Inertia: 23.04
+DBSCAN,2,8,0.4754793650938371,0.5969633374483223,7.495424813587671,"eps=0.940, min_samples=2"
+Hierarchical,2,0,0.4338723605005922,0.8641003982074001,13.335420675338632,Linkage: ward

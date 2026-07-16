@@ -1,0 +1,149 @@
+BANGALORE AIR QUALITY CLUSTERING ANALYSIS
+POLLUTION HOTSPOT IDENTIFICATION REPORT
+================================================================================
+
+
+================================================================================
+K-Means CLUSTERING RESULTS
+================================================================================
+
+Cluster Summary:
+ Cluster  mean_aqi  median_aqi  max_aqi severity
+       1 97.761612   89.750000    500.0     High
+       2 78.861566   69.500000    246.0   Medium
+       0 66.862016   63.888057    243.0      Low
+
+Identified Hotspots (2 stations):
+  - RVCE-Mailasandra: Mean AQI 102.8, Max AQI 323.0, 152 unhealthy days
+  - Silk Board: Mean AQI 92.8, Max AQI 500.0, 133 unhealthy days
+
+RECOMMENDATIONS BASED ON K-Means CLUSTERING
+================================================================================
+
+1. PRIORITY INTERVENTION AREAS:
+   - RVCE-Mailasandra: Average AQI 102.8
+   - Silk Board: Average AQI 92.8
+
+2. MONITORING RECOMMENDATIONS:
+   - 2 stations require enhanced monitoring
+   - Total 285 days of unhealthy air quality recorded
+   - Consider real-time alerts for these locations
+
+3. CLUSTER-SPECIFIC ACTIONS:
+
+   Cluster 1 (High Severity):
+   - Implement traffic restrictions during peak pollution periods
+   - Increase green cover and air purification systems
+   - Conduct source apportionment studies
+
+4. GENERAL RECOMMENDATIONS:
+   - Establish air quality forecasting system
+   - Public awareness campaigns in high-pollution areas
+   - Coordinate with traffic and urban planning departments
+   - Regular calibration and maintenance of monitoring stations
+
+
+================================================================================
+DBSCAN CLUSTERING RESULTS
+================================================================================
+
+Cluster Summary:
+ Cluster  mean_aqi  median_aqi  max_aqi severity
+      -1 74.340329   67.062500    500.0     High
+       1 70.628871   68.049383    243.0   Medium
+       0 80.197404   79.228155    194.0      Low
+
+Identified Hotspots (8 stations):
+  - RVCE-Mailasandra: Mean AQI 102.8, Max AQI 323.0, 152 unhealthy days
+  - Silk Board: Mean AQI 92.8, Max AQI 500.0, 133 unhealthy days
+  - Kasturi Nagar: Mean AQI 81.6, Max AQI 215.0, 124 unhealthy days
+  - Bapuji Nagar: Mean AQI 81.1, Max AQI 192.0, 112 unhealthy days
+  - Jayanagar 5th Block: Mean AQI 73.9, Max AQI 246.0, 107 unhealthy days
+  - BTM Layout: Mean AQI 62.7, Max AQI 198.0, 18 unhealthy days
+  - Hombegowda Nagar: Mean AQI 54.2, Max AQI 181.0, 19 unhealthy days
+  - Sanegurava Halli: Mean AQI 45.7, Max AQI 215.0, 7 unhealthy days
+
+RECOMMENDATIONS BASED ON DBSCAN CLUSTERING
+================================================================================
+
+1. PRIORITY INTERVENTION AREAS:
+   - RVCE-Mailasandra: Average AQI 102.8
+   - Silk Board: Average AQI 92.8
+   - Kasturi Nagar: Average AQI 81.6
+   - Bapuji Nagar: Average AQI 81.1
+   - Jayanagar 5th Block: Average AQI 73.9
+
+2. MONITORING RECOMMENDATIONS:
+   - 8 stations require enhanced monitoring
+   - Total 672 days of unhealthy air quality recorded
+   - Consider real-time alerts for these locations
+
+3. CLUSTER-SPECIFIC ACTIONS:
+
+   Cluster -1 (High Severity):
+   - Implement traffic restrictions during peak pollution periods
+   - Increase green cover and air purification systems
+   - Conduct source apportionment studies
+
+4. GENERAL RECOMMENDATIONS:
+   - Establish air quality forecasting system
+   - Public awareness campaigns in high-pollution areas
+   - Coordinate with traffic and urban planning departments
+   - Regular calibration and maintenance of monitoring stations
+
+
+================================================================================
+Hierarchical CLUSTERING RESULTS
+================================================================================
+
+Cluster Summary:
+ Cluster  mean_aqi  median_aqi  max_aqi severity
+       0 86.421585   77.600000    500.0     High
+       1 66.862016   63.888057    243.0      Low
+
+Identified Hotspots (5 stations):
+  - RVCE-Mailasandra: Mean AQI 102.8, Max AQI 323.0, 152 unhealthy days
+  - Silk Board: Mean AQI 92.8, Max AQI 500.0, 133 unhealthy days
+  - Kasturi Nagar: Mean AQI 81.6, Max AQI 215.0, 124 unhealthy days
+  - Bapuji Nagar: Mean AQI 81.1, Max AQI 192.0, 112 unhealthy days
+  - Jayanagar 5th Block: Mean AQI 73.9, Max AQI 246.0, 107 unhealthy days
+
+RECOMMENDATIONS BASED ON Hierarchical CLUSTERING
+================================================================================
+
+1. PRIORITY INTERVENTION AREAS:
+   - RVCE-Mailasandra: Average AQI 102.8
+   - Silk Board: Average AQI 92.8
+   - Kasturi Nagar: Average AQI 81.6
+   - Bapuji Nagar: Average AQI 81.1
+   - Jayanagar 5th Block: Average AQI 73.9
+
+2. MONITORING RECOMMENDATIONS:
+   - 5 stations require enhanced monitoring
+   - Total 628 days of unhealthy air quality recorded
+   - Consider real-time alerts for these locations
+
+3. CLUSTER-SPECIFIC ACTIONS:
+
+   Cluster 0 (High Severity):
+   - Implement traffic restrictions during peak pollution periods
+   - Increase green cover and air purification systems
+   - Conduct source apportionment studies
+
+4. GENERAL RECOMMENDATIONS:
+   - Establish air quality forecasting system
+   - Public awareness campaigns in high-pollution areas
+   - Coordinate with traffic and urban planning departments
+   - Regular calibration and maintenance of monitoring stations
+
+
+================================================================================
+CONSENSUS HOTSPOT ANALYSIS
+================================================================================
+
+Stations identified as hotspots by multiple models:
+  - Bapuji Nagar: Identified by DBSCAN, Hierarchical
+  - Jayanagar 5th Block: Identified by DBSCAN, Hierarchical
+  - Kasturi Nagar: Identified by DBSCAN, Hierarchical
+  - RVCE-Mailasandra: Identified by K-Means, DBSCAN, Hierarchical
+  - Silk Board: Identified by K-Means, DBSCAN, Hierarchical

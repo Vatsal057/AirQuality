@@ -1,0 +1,14 @@
+Station,KMeans_Cluster,DBSCAN_Cluster,Hierarchical_Cluster
+BTM Layout,0,-1,1
+Bapuji Nagar,2,-1,0
+City Railway Station,0,0,1
+Hebbal,0,1,1
+Hombegowda Nagar,0,-1,1
+Jayanagar 5th Block,2,-1,0
+Jigani,0,1,1
+Kasturi Nagar,2,-1,0
+Peenya,0,0,1
+RVCE-Mailasandra,1,-1,0
+Sanegurava Halli,0,-1,1
+Shivapura Peenya,0,1,1
+Silk Board,1,-1,0
