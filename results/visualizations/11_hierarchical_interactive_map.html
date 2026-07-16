@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_a96bd2e12321da05fcd3b15b9fbb67fb {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+     <div style="position: fixed; 
+     bottom: 50px; left: 50px; width: 170px; height: 90px; 
+     border:2px solid grey; z-index:9999; font-size:14px;
+     background-color:white; opacity: 0.9; padding: 10px;">
+     <b>Hierarchical Clusters</b> <br>
+     <i class="fa fa-circle" style="color:#e41a1c"></i>&nbsp;Cluster 0<br><i class="fa fa-circle" style="color:#377eb8"></i>&nbsp;Cluster 1<br></div>
+    
+            <div class="folium-map" id="map_a96bd2e12321da05fcd3b15b9fbb67fb" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_a96bd2e12321da05fcd3b15b9fbb67fb = L.map(
+                "map_a96bd2e12321da05fcd3b15b9fbb67fb",
+                {
+                    center: [12.95753846153846, 77.5770923076923],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 11,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_3031b61a1011c9b0b09595a6087ecbb2 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "CartoDB",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_3031b61a1011c9b0b09595a6087ecbb2.addTo(map_a96bd2e12321da05fcd3b15b9fbb67fb);
+        
+    
+            var circle_marker_b47385d1d350258eab15e9b4908a6101 = L.circleMarker(
+                [12.9165, 77.6101],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#377eb8", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_a96bd2e12321da05fcd3b15b9fbb67fb);
+        
+    
+        var popup_4788385b34c4ad1aaca73a069b0722ff = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b97c7b86db76043c75c5ce21696af6d2 = $(`<div id="html_b97c7b86db76043c75c5ce21696af6d2" style="width: 100.0%; height: 100.0%;"><b>BTM Layout</b><br>Cluster: 1</div>`)[0];
+                popup_4788385b34c4ad1aaca73a069b0722ff.setContent(html_b97c7b86db76043c75c5ce21696af6d2);
+            
+        
+
+        circle_marker_b47385d1d350258eab15e9b4908a6101.bindPopup(popup_4788385b34c4ad1aaca73a069b0722ff)
+        ;
+
+        
+    
+    
+            circle_marker_b47385d1d350258eab15e9b4908a6101.bindTooltip(
+                `<div>
+                     BTM Layout (Cluster 1)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_957e9e93a38d36fab70abfad54ade2ac = L.circleMarker(
+                [12.9634, 77.5354],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e41a1c", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_a96bd2e12321da05fcd3b15b9fbb67fb);
+        
+    
+        var popup_85a96dfcea11af3776cd8f8f7a0f8438 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_825022768d926d67c27caf6d1905d251 = $(`<div id="html_825022768d926d67c27caf6d1905d251" style="width: 100.0%; height: 100.0%;"><b>Bapuji Nagar</b><br>Cluster: 0</div>`)[0];
+                popup_85a96dfcea11af3776cd8f8f7a0f8438.setContent(html_825022768d926d67c27caf6d1905d251);
+            
+        
+
+        circle_marker_957e9e93a38d36fab70abfad54ade2ac.bindPopup(popup_85a96dfcea11af3776cd8f8f7a0f8438)
+        ;
+
+        
+    
+    
+            circle_marker_957e9e93a38d36fab70abfad54ade2ac.bindTooltip(
+                `<div>
+                     Bapuji Nagar (Cluster 0)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b71d50f8de6c58db1f9763c2f9190038 = L.circleMarker(
+                [12.9781, 77.5696],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#377eb8", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_a96bd2e12321da05fcd3b15b9fbb67fb);
+        
+    
+        var popup_f755456cc317c1c9b01840b9eec62b12 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_decd1c59f8d2cac4e2807755dfe4cf1c = $(`<div id="html_decd1c59f8d2cac4e2807755dfe4cf1c" style="width: 100.0%; height: 100.0%;"><b>City Railway Station</b><br>Cluster: 1</div>`)[0];
+                popup_f755456cc317c1c9b01840b9eec62b12.setContent(html_decd1c59f8d2cac4e2807755dfe4cf1c);
+            
+        
+
+        circle_marker_b71d50f8de6c58db1f9763c2f9190038.bindPopup(popup_f755456cc317c1c9b01840b9eec62b12)
+        ;
+
+        
+    
+    
+            circle_marker_b71d50f8de6c58db1f9763c2f9190038.bindTooltip(
+                `<div>
+                     City Railway Station (Cluster 1)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bbd7b104df4cde1606ea8c95ef23c95e = L.circleMarker(
+                [13.0354, 77.5988],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#377eb8", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_a96bd2e12321da05fcd3b15b9fbb67fb);
+        
+    
+        var popup_3a2157508a7a44f10a717d0e333ed5a9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e7c048829b82c42f8ce6dff9d562c997 = $(`<div id="html_e7c048829b82c42f8ce6dff9d562c997" style="width: 100.0%; height: 100.0%;"><b>Hebbal</b><br>Cluster: 1</div>`)[0];
+                popup_3a2157508a7a44f10a717d0e333ed5a9.setContent(html_e7c048829b82c42f8ce6dff9d562c997);
+            
+        
+
+        circle_marker_bbd7b104df4cde1606ea8c95ef23c95e.bindPopup(popup_3a2157508a7a44f10a717d0e333ed5a9)
+        ;
+
+        
+    
+    
+            circle_marker_bbd7b104df4cde1606ea8c95ef23c95e.bindTooltip(
+                `<div>
+                     Hebbal (Cluster 1)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_62e9ef7b6463c1226cafccfeaeac1144 = L.circleMarker(
+                [12.9389, 77.5962],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#377eb8", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_a96bd2e12321da05fcd3b15b9fbb67fb);
+        
+    
+        var popup_319af9bc7e29e5db6eb5aeeb000a3041 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8f5548869bd2418017e612794a2b9738 = $(`<div id="html_8f5548869bd2418017e612794a2b9738" style="width: 100.0%; height: 100.0%;"><b>Hombegowda Nagar</b><br>Cluster: 1</div>`)[0];
+                popup_319af9bc7e29e5db6eb5aeeb000a3041.setContent(html_8f5548869bd2418017e612794a2b9738);
+            
+        
+
+        circle_marker_62e9ef7b6463c1226cafccfeaeac1144.bindPopup(popup_319af9bc7e29e5db6eb5aeeb000a3041)
+        ;
+
+        
+    
+    
+            circle_marker_62e9ef7b6463c1226cafccfeaeac1144.bindTooltip(
+                `<div>
+                     Hombegowda Nagar (Cluster 1)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_35d89ab36e113c7c537cd1337820909b = L.circleMarker(
+                [12.9238, 77.5851],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e41a1c", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_a96bd2e12321da05fcd3b15b9fbb67fb);
+        
+    
+        var popup_e75c959b0858ee68115bece8e5b9b526 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8ffd87c376064343d001efc736c3391b = $(`<div id="html_8ffd87c376064343d001efc736c3391b" style="width: 100.0%; height: 100.0%;"><b>Jayanagar 5th Block</b><br>Cluster: 0</div>`)[0];
+                popup_e75c959b0858ee68115bece8e5b9b526.setContent(html_8ffd87c376064343d001efc736c3391b);
+            
+        
+
+        circle_marker_35d89ab36e113c7c537cd1337820909b.bindPopup(popup_e75c959b0858ee68115bece8e5b9b526)
+        ;
+
+        
+    
+    
+            circle_marker_35d89ab36e113c7c537cd1337820909b.bindTooltip(
+                `<div>
+                     Jayanagar 5th Block (Cluster 0)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_10ae9bf9334f2cf271568bf43103cceb = L.circleMarker(
+                [12.784, 77.6409],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#377eb8", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_a96bd2e12321da05fcd3b15b9fbb67fb);
+        
+    
+        var popup_e7e5fe199667365e1d0cb2336d49d0f7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9a22d3e0483923673e0ade7812bee1e5 = $(`<div id="html_9a22d3e0483923673e0ade7812bee1e5" style="width: 100.0%; height: 100.0%;"><b>Jigani</b><br>Cluster: 1</div>`)[0];
+                popup_e7e5fe199667365e1d0cb2336d49d0f7.setContent(html_9a22d3e0483923673e0ade7812bee1e5);
+            
+        
+
+        circle_marker_10ae9bf9334f2cf271568bf43103cceb.bindPopup(popup_e7e5fe199667365e1d0cb2336d49d0f7)
+        ;
+
+        
+    
+    
+            circle_marker_10ae9bf9334f2cf271568bf43103cceb.bindTooltip(
+                `<div>
+                     Jigani (Cluster 1)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f203b284737e67ff49130f089f6cc05c = L.circleMarker(
+                [13.0165, 77.6622],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e41a1c", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_a96bd2e12321da05fcd3b15b9fbb67fb);
+        
+    
+        var popup_6b23ff86326b0e27ab00a4e659d7e741 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_abf3701fe899f51d44640eaca29ecfff = $(`<div id="html_abf3701fe899f51d44640eaca29ecfff" style="width: 100.0%; height: 100.0%;"><b>Kasturi Nagar</b><br>Cluster: 0</div>`)[0];
+                popup_6b23ff86326b0e27ab00a4e659d7e741.setContent(html_abf3701fe899f51d44640eaca29ecfff);
+            
+        
+
+        circle_marker_f203b284737e67ff49130f089f6cc05c.bindPopup(popup_6b23ff86326b0e27ab00a4e659d7e741)
+        ;
+
+        
+    
+    
+            circle_marker_f203b284737e67ff49130f089f6cc05c.bindTooltip(
+                `<div>
+                     Kasturi Nagar (Cluster 0)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8e2591b8c394a8d7080cedfe277fe156 = L.circleMarker(
+                [13.0285, 77.5197],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#377eb8", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_a96bd2e12321da05fcd3b15b9fbb67fb);
+        
+    
+        var popup_7b787dc267b105d930dd5bd387ab804d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0bf32ea964ccd2ec375470a9a84b4515 = $(`<div id="html_0bf32ea964ccd2ec375470a9a84b4515" style="width: 100.0%; height: 100.0%;"><b>Peenya</b><br>Cluster: 1</div>`)[0];
+                popup_7b787dc267b105d930dd5bd387ab804d.setContent(html_0bf32ea964ccd2ec375470a9a84b4515);
+            
+        
+
+        circle_marker_8e2591b8c394a8d7080cedfe277fe156.bindPopup(popup_7b787dc267b105d930dd5bd387ab804d)
+        ;
+
+        
+    
+    
+            circle_marker_8e2591b8c394a8d7080cedfe277fe156.bindTooltip(
+                `<div>
+                     Peenya (Cluster 1)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_778f0470b566636fd1228894ece8e943 = L.circleMarker(
+                [12.9242, 77.4984],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e41a1c", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_a96bd2e12321da05fcd3b15b9fbb67fb);
+        
+    
+        var popup_d418a54e175474c6d63512bd48823a61 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_452135b7ea76b43a20d80dd73c73cfc6 = $(`<div id="html_452135b7ea76b43a20d80dd73c73cfc6" style="width: 100.0%; height: 100.0%;"><b>RVCE-Mailasandra</b><br>Cluster: 0</div>`)[0];
+                popup_d418a54e175474c6d63512bd48823a61.setContent(html_452135b7ea76b43a20d80dd73c73cfc6);
+            
+        
+
+        circle_marker_778f0470b566636fd1228894ece8e943.bindPopup(popup_d418a54e175474c6d63512bd48823a61)
+        ;
+
+        
+    
+    
+            circle_marker_778f0470b566636fd1228894ece8e943.bindTooltip(
+                `<div>
+                     RVCE-Mailasandra (Cluster 0)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9a2b185eaf65295cac8a400f990a0b64 = L.circleMarker(
+                [12.9897, 77.5457],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#377eb8", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_a96bd2e12321da05fcd3b15b9fbb67fb);
+        
+    
+        var popup_6fd60ae61b4bb142435b52e21a82800f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_62f5f1e92435c110ec3bd5e5191c3ced = $(`<div id="html_62f5f1e92435c110ec3bd5e5191c3ced" style="width: 100.0%; height: 100.0%;"><b>Sanegurava Halli</b><br>Cluster: 1</div>`)[0];
+                popup_6fd60ae61b4bb142435b52e21a82800f.setContent(html_62f5f1e92435c110ec3bd5e5191c3ced);
+            
+        
+
+        circle_marker_9a2b185eaf65295cac8a400f990a0b64.bindPopup(popup_6fd60ae61b4bb142435b52e21a82800f)
+        ;
+
+        
+    
+    
+            circle_marker_9a2b185eaf65295cac8a400f990a0b64.bindTooltip(
+                `<div>
+                     Sanegurava Halli (Cluster 1)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3c1fa21fd8fc1309202bc6cb6e150a20 = L.circleMarker(
+                [13.0315, 77.5167],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#377eb8", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_a96bd2e12321da05fcd3b15b9fbb67fb);
+        
+    
+        var popup_7abdbe0a8106b301cce50ff48ead4870 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_350a9aae908b675b477b4536a39d96e2 = $(`<div id="html_350a9aae908b675b477b4536a39d96e2" style="width: 100.0%; height: 100.0%;"><b>Shivapura Peenya</b><br>Cluster: 1</div>`)[0];
+                popup_7abdbe0a8106b301cce50ff48ead4870.setContent(html_350a9aae908b675b477b4536a39d96e2);
+            
+        
+
+        circle_marker_3c1fa21fd8fc1309202bc6cb6e150a20.bindPopup(popup_7abdbe0a8106b301cce50ff48ead4870)
+        ;
+
+        
+    
+    
+            circle_marker_3c1fa21fd8fc1309202bc6cb6e150a20.bindTooltip(
+                `<div>
+                     Shivapura Peenya (Cluster 1)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a18e4f0ba724f20b0ebaa1345c7913f4 = L.circleMarker(
+                [12.9175, 77.6234],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e41a1c", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_a96bd2e12321da05fcd3b15b9fbb67fb);
+        
+    
+        var popup_02ecad330731c6e925d718d730fc20b5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_cbc5f1cd5404afa6e186a4cda1b82f5d = $(`<div id="html_cbc5f1cd5404afa6e186a4cda1b82f5d" style="width: 100.0%; height: 100.0%;"><b>Silk Board</b><br>Cluster: 0</div>`)[0];
+                popup_02ecad330731c6e925d718d730fc20b5.setContent(html_cbc5f1cd5404afa6e186a4cda1b82f5d);
+            
+        
+
+        circle_marker_a18e4f0ba724f20b0ebaa1345c7913f4.bindPopup(popup_02ecad330731c6e925d718d730fc20b5)
+        ;
+
+        
+    
+    
+            circle_marker_a18e4f0ba724f20b0ebaa1345c7913f4.bindTooltip(
+                `<div>
+                     Silk Board (Cluster 0)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>

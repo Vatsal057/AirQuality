@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0; bottom: 0; left: 0; right: 0;
+        }
+
+        .station-label {
+            background: white;
+            border: 1px solid #555;
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #000;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Legend -->
+<div style="position: fixed; bottom: 50px; left: 50px; width: 170px;
+            border:2px solid grey; z-index:9999; font-size:14px;
+            background-color:white; opacity:0.9; padding:10px;">
+    <b>K-Means Clusters</b><br>
+    <i class="fa fa-circle" style="color:#e41a1c"></i> Cluster 0<br>
+    <i class="fa fa-circle" style="color:#377eb8"></i> Cluster 1<br>
+    <i class="fa fa-circle" style="color:#4daf4a"></i> Cluster 2
+</div>
+
+<div id="map"></div>
+
+<script>
+    var map = L.map("map", {
+        center: [12.9575, 77.5771],
+        zoom: 11
+    });
+
+    L.tileLayer(
+        "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+        { attribution: "CartoDB" }
+    ).addTo(map);
+
+    function addStation(lat, lon, name, cluster, color) {
+        var marker = L.circleMarker([lat, lon], {
+            radius: 10,
+            color: "white",
+            weight: 2,
+            fillColor: color,
+            fillOpacity: 0.9
+        }).addTo(map);
+
+        marker.bindPopup(`<b>${name}</b><br>Cluster: ${cluster}`);
+
+        marker.bindTooltip(
+            `<div>${name}</div>`,
+            {
+                permanent: true,
+                direction: "top",
+                offset: [0, -10],
+                className: "station-label"
+            }
+        );
+    }
+
+    addStation(12.9165, 77.6101, "BTM Layout", 0, "#e41a1c");
+    addStation(12.9634, 77.5354, "Bapuji Nagar", 2, "#4daf4a");
+    addStation(12.9781, 77.5696, "City Railway Station", 0, "#e41a1c");
+    addStation(13.0354, 77.5988, "Hebbal", 0, "#e41a1c");
+    addStation(12.9389, 77.5962, "Hombegowda Nagar", 0, "#e41a1c");
+    addStation(12.9238, 77.5851, "Jayanagar 5th Block", 2, "#4daf4a");
+    addStation(12.7840, 77.6409, "Jigani", 0, "#e41a1c");
+    addStation(13.0165, 77.6622, "Kasturi Nagar", 2, "#4daf4a");
+    addStation(13.0285, 77.5197, "Peenya", 0, "#e41a1c");
+    addStation(12.9242, 77.4984, "RVCE-Mailasandra", 1, "#377eb8");
+    addStation(12.9897, 77.5457, "Sanegurava Halli", 0, "#e41a1c");
+    addStation(13.0315, 77.5167, "Shivapura Peenya", 0, "#e41a1c");
+    addStation(12.9175, 77.6234, "Silk Board", 1, "#377eb8");
+</script>
+
+</body>
+</html>
