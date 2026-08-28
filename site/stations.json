@@ -1,0 +1,241 @@
+{
+ "year": 2024,
+ "stationsUsed": 13,
+ "exportsCollected": 14,
+ "models": [
+  {
+   "name": "K-Means",
+   "clusters": 3,
+   "noise": 0,
+   "silhouette": 0.384,
+   "daviesBouldin": 0.812,
+   "calinski": 11.93,
+   "note": "elbow method, K chosen at 3; inertia 23.04"
+  },
+  {
+   "name": "DBSCAN",
+   "clusters": 2,
+   "noise": 8,
+   "silhouette": 0.475,
+   "daviesBouldin": 0.597,
+   "calinski": 7.5,
+   "note": "eps=0.940, min_samples=2"
+  },
+  {
+   "name": "Hierarchical",
+   "clusters": 2,
+   "noise": 0,
+   "silhouette": 0.434,
+   "daviesBouldin": 0.864,
+   "calinski": 13.34,
+   "note": "ward linkage"
+  }
+ ],
+ "stations": [
+  {
+   "station": "RVCE-Mailasandra",
+   "lat": 12.9242,
+   "lon": 77.4984,
+   "meanAqi": 102.8,
+   "maxAqi": 323,
+   "pctUnhealthy": 41.5,
+   "volatility": 21.0,
+   "winterAvg": 127.5,
+   "trendSlope": -0.1604,
+   "flaggedBy": [
+    "K-Means",
+    "DBSCAN",
+    "Hierarchical"
+   ],
+   "consensus": 3,
+   "network": "KSPCB"
+  },
+  {
+   "station": "Silk Board",
+   "lat": 12.9175,
+   "lon": 77.6234,
+   "meanAqi": 92.8,
+   "maxAqi": 500,
+   "pctUnhealthy": 36.3,
+   "volatility": 22.7,
+   "winterAvg": 98.4,
+   "trendSlope": -0.0443,
+   "flaggedBy": [
+    "K-Means",
+    "DBSCAN",
+    "Hierarchical"
+   ],
+   "consensus": 3,
+   "network": "KSPCB"
+  },
+  {
+   "station": "City Railway Station",
+   "lat": 12.9781,
+   "lon": 77.5696,
+   "meanAqi": 82.0,
+   "maxAqi": 149,
+   "pctUnhealthy": 10.1,
+   "volatility": 7.2,
+   "winterAvg": 79.3,
+   "trendSlope": 0.0333,
+   "flaggedBy": [],
+   "consensus": 0,
+   "network": "KSPCB"
+  },
+  {
+   "station": "Kasturi Nagar",
+   "lat": 13.0165,
+   "lon": 77.6622,
+   "meanAqi": 81.6,
+   "maxAqi": 215,
+   "pctUnhealthy": 33.9,
+   "volatility": 11.4,
+   "winterAvg": 100.9,
+   "trendSlope": -0.2578,
+   "flaggedBy": [
+    "DBSCAN",
+    "Hierarchical"
+   ],
+   "consensus": 2,
+   "network": "KSPCB"
+  },
+  {
+   "station": "Bapuji Nagar",
+   "lat": 12.9634,
+   "lon": 77.5354,
+   "meanAqi": 81.1,
+   "maxAqi": 192,
+   "pctUnhealthy": 30.6,
+   "volatility": 16.7,
+   "winterAvg": 102.1,
+   "trendSlope": -0.0798,
+   "flaggedBy": [
+    "DBSCAN",
+    "Hierarchical"
+   ],
+   "consensus": 2,
+   "network": "KSPCB"
+  },
+  {
+   "station": "Peenya",
+   "lat": 13.0285,
+   "lon": 77.5197,
+   "meanAqi": 78.4,
+   "maxAqi": 194,
+   "pctUnhealthy": 5.5,
+   "volatility": 9.8,
+   "winterAvg": 78.8,
+   "trendSlope": 0.0138,
+   "flaggedBy": [],
+   "consensus": 0,
+   "network": "CPCB"
+  },
+  {
+   "station": "Jigani",
+   "lat": 12.784,
+   "lon": 77.6409,
+   "meanAqi": 75.0,
+   "maxAqi": 196,
+   "pctUnhealthy": 17.5,
+   "volatility": 12.4,
+   "winterAvg": 88.8,
+   "trendSlope": -0.0593,
+   "flaggedBy": [],
+   "consensus": 0,
+   "network": "KSPCB"
+  },
+  {
+   "station": "Jayanagar 5th Block",
+   "lat": 12.9238,
+   "lon": 77.5851,
+   "meanAqi": 73.9,
+   "maxAqi": 246,
+   "pctUnhealthy": 29.2,
+   "volatility": 16.6,
+   "winterAvg": 104.8,
+   "trendSlope": -0.1619,
+   "flaggedBy": [
+    "DBSCAN",
+    "Hierarchical"
+   ],
+   "consensus": 2,
+   "network": "KSPCB"
+  },
+  {
+   "station": "Shivapura Peenya",
+   "lat": 13.0315,
+   "lon": 77.5167,
+   "meanAqi": 71.7,
+   "maxAqi": 243,
+   "pctUnhealthy": 11.7,
+   "volatility": 12.0,
+   "winterAvg": 90.4,
+   "trendSlope": -0.0335,
+   "flaggedBy": [],
+   "consensus": 0,
+   "network": "KSPCB"
+  },
+  {
+   "station": "Hebbal",
+   "lat": 13.0354,
+   "lon": 77.5988,
+   "meanAqi": 65.2,
+   "maxAqi": 173,
+   "pctUnhealthy": 14.5,
+   "volatility": 12.7,
+   "winterAvg": 82.5,
+   "trendSlope": -0.0777,
+   "flaggedBy": [],
+   "consensus": 0,
+   "network": "KSPCB"
+  },
+  {
+   "station": "BTM Layout",
+   "lat": 12.9165,
+   "lon": 77.6101,
+   "meanAqi": 62.7,
+   "maxAqi": 198,
+   "pctUnhealthy": 4.9,
+   "volatility": 10.2,
+   "winterAvg": 69.3,
+   "trendSlope": -0.0016,
+   "flaggedBy": [
+    "DBSCAN"
+   ],
+   "consensus": 1,
+   "network": "CPCB"
+  },
+  {
+   "station": "Hombegowda Nagar",
+   "lat": 12.9389,
+   "lon": 77.5962,
+   "meanAqi": 54.2,
+   "maxAqi": 181,
+   "pctUnhealthy": 5.2,
+   "volatility": 11.2,
+   "winterAvg": 72.2,
+   "trendSlope": -0.0943,
+   "flaggedBy": [
+    "DBSCAN"
+   ],
+   "consensus": 1,
+   "network": "KSPCB"
+  },
+  {
+   "station": "Sanegurava Halli",
+   "lat": 12.9897,
+   "lon": 77.5457,
+   "meanAqi": 45.7,
+   "maxAqi": 215,
+   "pctUnhealthy": 1.9,
+   "volatility": 6.7,
+   "winterAvg": 54.2,
+   "trendSlope": -0.0704,
+   "flaggedBy": [
+    "DBSCAN"
+   ],
+   "consensus": 1,
+   "network": "KSPCB"
+  }
+ ]
+}
