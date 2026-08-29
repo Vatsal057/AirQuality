@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Which Bangalore? · 2024 air quality across 13 monitoring stations</title>
-<meta name="description" content="A city-wide AQI average hides a 57-point gap. Daily 2024 AQI from Bengaluru's CPCB/KSPCB stations, clustered three ways to find the pollution hotspots.">
+<title>Bengaluru air quality, 2024 — station by station</title>
+<meta name="description" content="A year of daily AQI from Bengaluru's CPCB and KSPCB monitoring stations, clustered three ways to find the worst spots. The gap between the dirtiest and cleanest station is 57 AQI points.">
 <meta name="author" content="Vatsal Vaghasiya">
 <link rel="canonical" href="https://vatsal057.github.io/AirQuality/">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Which Bangalore? · 2024 air quality hotspot analysis">
-<meta property="og:description" content="The city average is close to meaningless: the worst and cleanest station sit 57 AQI points apart. 13 stations, 6 engineered features, 3 clustering algorithms.">
+<meta property="og:title" content="Bengaluru air quality, 2024 — station by station">
+<meta property="og:description" content="The city average hides a 57 point gap between stations. 13 stations, 6 features each, K-Means vs hierarchical vs DBSCAN.">
 <meta property="og:url" content="https://vatsal057.github.io/AirQuality/">
 <meta property="og:image" content="https://vatsal057.github.io/AirQuality/results/visualizations/professional/05_geographic_map_professional.png">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <link rel="stylesheet" href="site/style.css">
@@ -26,80 +26,85 @@
 
 <a class="skip" href="#main">Skip to content</a>
 
+<div class="band-strip" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
 <header class="topbar">
-  <a class="logo" href="#top">air<span class="dot">.</span>quality</a>
-  <nav class="topnav" aria-label="Sections">
-    <a href="#map">Map</a>
-    <a href="#models">Models</a>
-    <a href="#hotspots">Hotspots</a>
-    <a href="#method">Method</a>
-    <a href="#charts">Charts</a>
-    <a href="#limits">Limits</a>
-  </nav>
-  <a class="btn btn-ghost sm" href="https://github.com/Vatsal057/AirQuality">Repo ↗</a>
+  <div class="topbar-in">
+    <a class="logo" href="#top">BLR_AQI_2024</a>
+    <nav class="topnav" aria-label="Sections">
+      <a href="#map">stations</a>
+      <a href="#models">models</a>
+      <a href="#hotspots">hotspots</a>
+      <a href="#method">method</a>
+      <a href="#figures">figures</a>
+      <a href="#limits">limits</a>
+    </nav>
+    <a class="btn sm" href="https://github.com/Vatsal057/AirQuality">Repo</a>
+  </div>
 </header>
 
 <main id="main">
 
 <section id="top" class="hero">
-  <p class="eyebrow mono">Bengaluru · Jan–Dec 2024 · CPCB &amp; KSPCB daily AQI</p>
-  <h1>&ldquo;Bangalore AQI today: 92.&rdquo;<br><em>Which Bangalore?</em></h1>
+  <p class="kicker mono">Bengaluru &middot; Jan&ndash;Dec 2024 &middot; CPCB and KSPCB daily AQI</p>
+  <h1>The city AQI number is an average of places that have nothing in common.</h1>
   <p class="lede">
-    A single city-wide number averages a traffic junction and a leafy suburb into a
-    meaningless middle. I pulled a full year of daily AQI from every Bengaluru
-    monitoring station I could get a clean export for, engineered six features per
-    station, and clustered them three different ways to find the places the average
-    hides.
+    News apps show one number for all of Bengaluru. On the same day, a traffic
+    junction and a quiet residential road can be 80 AQI points apart, so that
+    single number does not describe either of them.
+  </p>
+  <p class="lede">
+    I collected a year of daily readings from every station I could get a clean
+    export for, worked out six numbers that describe each station's year, and
+    then grouped the stations three different ways to see which ones keep coming
+    out worst.
   </p>
 
-  <ul class="stats" role="list">
-    <li><span class="stat-n mono">57.1</span><span class="stat-l">AQI points between the worst and cleanest station, yearly mean</span></li>
-    <li><span class="stat-n mono">13</span><span class="stat-l">stations with complete 2024 coverage, from 14 exports collected</span></li>
-    <li><span class="stat-n mono">500</span><span class="stat-l">peak AQI recorded at Silk Board &mdash; the top of the scale</span></li>
-    <li><span class="stat-n mono">2</span><span class="stat-l">stations flagged as hotspots by all three algorithms</span></li>
+  <ul class="figs" role="list">
+    <li><span class="fig-n mono">57.1</span><span class="fig-l">AQI points between the dirtiest and cleanest station, averaged over the year</span></li>
+    <li><span class="fig-n mono">13</span><span class="fig-l">stations with full 2024 coverage, out of 14 exports I downloaded</span></li>
+    <li><span class="fig-n mono">500</span><span class="fig-l">worst single reading, at Silk Board. That is the top of the scale</span></li>
+    <li><span class="fig-n mono">2</span><span class="fig-l">stations that all three grouping methods agreed were the worst</span></li>
   </ul>
 </section>
 
 <section id="map" class="band">
-  <h2>Every station, measured</h2>
+  <h2><span class="h2-num mono">01</span>Every station on the map</h2>
   <p class="sub">
-    Real 2024 values, not model output. Circle colour is the station's yearly mean AQI;
-    circle size is the share of days it spent in unhealthy territory. Click any station
-    for its full feature vector.
+    These are measured 2024 values. Circle colour is the station's average AQI
+    for the year, and circle size is how much of the year it spent in unhealthy
+    air. Click a station to see all six numbers I used.
   </p>
 
   <div class="map-controls" role="group" aria-label="Colour the map by">
-    <span class="mono lbl">Colour by</span>
-    <button class="chip is-on" data-mode="mean" aria-pressed="true">Mean AQI</button>
-    <button class="chip" data-mode="unhealthy" aria-pressed="false">% unhealthy days</button>
-    <button class="chip" data-mode="consensus" aria-pressed="false">Hotspot consensus</button>
+    <span class="mono lbl">colour by</span>
+    <button class="chip is-on" data-mode="mean" aria-pressed="true">average AQI</button>
+    <button class="chip" data-mode="unhealthy" aria-pressed="false">unhealthy days</button>
+    <button class="chip" data-mode="consensus" aria-pressed="false">how many models flagged it</button>
   </div>
 
-  <div id="leaflet" role="application" aria-label="Interactive map of Bengaluru air-quality monitoring stations"></div>
+  <div id="leaflet" role="application" aria-label="Map of Bengaluru air quality monitoring stations"></div>
 
   <div class="legend mono" id="legend" aria-live="polite"></div>
 
   <noscript>
-    <p class="note">
-      The interactive map needs JavaScript. The static version of the same result is
-      in the <a href="#charts">charts</a> below.
-    </p>
+    <p class="note">The map needs JavaScript. The same result is in the <a href="#figures">figures</a> further down.</p>
   </noscript>
 
   <details class="table-wrap">
-    <summary>All 13 stations as a table</summary>
+    <summary>Show all 13 stations as a table</summary>
     <div class="scroll-x">
       <table id="stationTable">
-        <caption>Per-station 2024 features. Sorted by yearly mean AQI, worst first.</caption>
+        <caption>Each station's 2024 numbers, worst average first.</caption>
         <thead>
           <tr>
             <th scope="col">Station</th>
             <th scope="col">Network</th>
-            <th scope="col" class="num">Mean AQI</th>
-            <th scope="col" class="num">Peak AQI</th>
+            <th scope="col" class="num">Avg AQI</th>
+            <th scope="col" class="num">Worst day</th>
             <th scope="col" class="num">Unhealthy days</th>
-            <th scope="col" class="num">7-day volatility</th>
-            <th scope="col" class="num">Winter mean</th>
+            <th scope="col" class="num">Weekly swing</th>
+            <th scope="col" class="num">Winter avg</th>
             <th scope="col">Flagged by</th>
           </tr>
         </thead>
@@ -109,25 +114,28 @@
   </details>
 </section>
 
-<section id="models" class="band alt">
-  <h2>Three algorithms, one disagreement worth having</h2>
+<section id="models" class="band sunk">
+  <h2><span class="h2-num mono">02</span>Three ways of grouping the stations</h2>
   <p class="sub">
-    K-Means, agglomerative (Ward) and DBSCAN on the same six-feature matrix.
-    They do not agree, and the disagreement is the finding.
+    I ran K-Means, hierarchical clustering with Ward linkage, and DBSCAN on the
+    same six features. They give different answers, and the differences are
+    useful, so all three are here with their scores.
   </p>
 
   <div class="scroll-x">
     <table id="modelTable">
-      <caption>Internal validation metrics. Higher silhouette and Calinski&ndash;Harabasz are better; lower Davies&ndash;Bouldin is better.</caption>
+      <caption>
+        Higher silhouette and Calinski&ndash;Harabasz are better. Lower Davies&ndash;Bouldin is better.
+      </caption>
       <thead>
         <tr>
           <th scope="col">Model</th>
-          <th scope="col" class="num">Clusters</th>
-          <th scope="col" class="num">Noise pts</th>
+          <th scope="col" class="num">Groups</th>
+          <th scope="col" class="num">Left out</th>
           <th scope="col" class="num">Silhouette</th>
           <th scope="col" class="num">Davies&ndash;Bouldin</th>
           <th scope="col" class="num">Calinski&ndash;Harabasz</th>
-          <th scope="col">Config</th>
+          <th scope="col">Settings</th>
         </tr>
       </thead>
       <tbody></tbody>
@@ -135,118 +143,129 @@
   </div>
 
   <div class="callout">
-    <h3>Why DBSCAN won, and where it didn't</h3>
+    <h3>Why I went with DBSCAN</h3>
     <p>
-      DBSCAN takes the best silhouette (0.475) and the best Davies&ndash;Bouldin (0.597),
-      but the reason it's the right tool here is structural rather than numerical:
-      it is the only one of the three that is allowed to refuse. K-Means must assign
-      every station to a cluster, so an extreme station gets absorbed into a broad
-      &ldquo;high&rdquo; group and its extremity is averaged away. DBSCAN pushed 8 stations
-      out as noise &mdash; and the points it refused to place are the hotspots.
+      DBSCAN has the best silhouette score at 0.475 and the best
+      Davies&ndash;Bouldin at 0.597. The bigger reason is how it behaves. K-Means
+      has to put every station into some group, so a station with extreme
+      readings gets pulled into a broad &ldquo;high&rdquo; group and stops looking
+      extreme. DBSCAN is allowed to leave a station out of every group, and it
+      left out 8 of them. Those 8 are the ones I care about.
     </p>
-    <p class="honest">
-      Being straight about it: Hierarchical clustering beats DBSCAN on
-      Calinski&ndash;Harabasz (13.34 vs 7.50), and with 13 points and 6 features every one
-      of these metrics is fragile. This is a small-<em>n</em> study. The claim I'll
-      defend is the ranking of stations, not the exact cluster count.
+    <p class="caveat">
+      Hierarchical clustering scores better than DBSCAN on
+      Calinski&ndash;Harabasz, 13.34 against 7.50. And with 13 stations and 6
+      features, all of these scores move around a lot. So I would defend the
+      ranking of the stations, and I would not defend the exact number of groups.
     </p>
   </div>
 </section>
 
 <section id="hotspots" class="band">
-  <h2>The consensus hotspots</h2>
+  <h2><span class="h2-num mono">03</span>Stations more than one model flagged</h2>
   <p class="sub">
-    Stations flagged by more than one algorithm. Agreement across methods with
-    different assumptions is worth more than any single model's output.
+    The three methods make different assumptions, so a station that shows up in
+    two or three of them is a stronger result than one that shows up in only one.
   </p>
 
   <ol class="hotspots" id="hotspotList" role="list"></ol>
 
   <p class="note">
-    RVCE-Mailasandra and Silk Board are the only stations every algorithm agrees on.
-    Silk Board is the one that hit AQI 500 &mdash; the ceiling of the index &mdash; and it is
-    a junction, which is exactly what you'd predict and exactly why a city-wide mean
-    is the wrong summary statistic.
+    RVCE-Mailasandra and Silk Board are the only two that all three methods
+    agreed on. Silk Board is the station that hit 500, and it sits on a junction,
+    which is roughly what you would guess before looking at any of this.
   </p>
 </section>
 
-<section id="method" class="band alt">
-  <h2>Most of this project was ETL</h2>
-  <p class="sub">The clustering at the end was almost the reward.</p>
+<section id="method" class="band sunk">
+  <h2><span class="h2-num mono">04</span>How I actually did it</h2>
+  <p class="sub">Most of the time went on cleaning the files. The clustering at the end was quick.</p>
 
   <ol class="steps" role="list">
     <li>
-      <h3><span class="mono step-n">01</span> Ingest</h3>
-      <p>
-        The CPCB CAAQMS portal hands you one Excel file per station in a wide
-        day&times;month layout, and the layout is not consistent between stations.
-        Each export had to be reshaped into a long-format time series before any
-        two stations could be compared.
-      </p>
+      <div>
+        <h3>Downloading the data</h3>
+        <p>
+          The CPCB portal gives you one Excel file per station, laid out as a
+          wide day-by-month grid. The layout is not the same between stations, so
+          I had to reshape each file into a plain date-and-value list before any
+          two stations could be compared.
+        </p>
+      </div>
     </li>
     <li>
-      <h3><span class="mono step-n">02</span> Reconcile</h3>
-      <p>
-        14 exports collected, 13 usable: one file (Kadabesanahalli) only covers
-        2023, so including it would have compared different years. It's still in
-        <code>data/raw/</code> &mdash; dropped in the notebook, not hidden.
-      </p>
+      <div>
+        <h3>Dropping one station</h3>
+        <p>
+          I downloaded 14 files and used 13. The Kadabesanahalli export only
+          covers 2023, so including it would have meant comparing one station's
+          2023 against everyone else's 2024. The file is still in
+          <code>data/raw/</code> and the notebook drops it.
+        </p>
+      </div>
     </li>
     <li>
-      <h3><span class="mono step-n">03</span> Engineer features</h3>
-      <p>
-        Six features summarise a station's year: mean AQI, peak AQI, share of
-        unhealthy days, 7-day rolling volatility, winter mean, and a linear trend
-        slope. Level, spikiness, seasonality and direction &mdash; standardised before
-        clustering, since AQI and a slope are not on the same scale.
-      </p>
+      <div>
+        <h3>Six numbers per station</h3>
+        <p>
+          Average AQI, worst reading, share of days in unhealthy air, how much it
+          swings week to week, winter average, and whether it trended up or down
+          over the year. AQI and a trend slope are on completely different
+          scales, so everything gets standardised before clustering.
+        </p>
+      </div>
     </li>
     <li>
-      <h3><span class="mono step-n">04</span> Cluster and compare</h3>
-      <p>
-        K-Means with the elbow method for K, Ward-linkage agglomerative, and DBSCAN
-        with <code>eps=0.940</code>, <code>min_samples=2</code>. All three scored on the
-        same internal metrics rather than picking the one that looked nicest.
-      </p>
+      <div>
+        <h3>Running the three methods</h3>
+        <p>
+          K-Means with the elbow method to pick the number of groups, hierarchical
+          with Ward linkage, and DBSCAN with <code>eps=0.940</code> and
+          <code>min_samples=2</code>. I scored all three on the same metrics so I
+          was not just picking whichever map looked nicest.
+        </p>
+      </div>
     </li>
     <li>
-      <h3><span class="mono step-n">05</span> Report</h3>
-      <p>
-        A ranked hotspot report, per-model maps and a consensus view. Full output
-        lives in <code>results/</code>, and the notebook runs top to bottom.
-      </p>
+      <div>
+        <h3>Writing it up</h3>
+        <p>
+          A ranked list of the worst stations, a map per method, and a combined
+          view. Everything is in <code>results/</code> and the notebook runs top
+          to bottom.
+        </p>
+      </div>
     </li>
   </ol>
 </section>
 
-<section id="charts" class="band">
-  <h2>Figures from the notebook</h2>
-  <p class="sub">Generated by <code>Air Quality Analysis.ipynb</code>, committed as-is.</p>
-
+<section id="figures" class="band">
+  <h2><span class="h2-num mono">05</span>Figures from the notebook</h2>
+  <p class="sub">Straight out of <code>Air Quality Analysis.ipynb</code>, unedited.</p>
   <div class="gallery" id="gallery"></div>
 </section>
 
-<section id="limits" class="band alt">
-  <h2>What this does not show</h2>
+<section id="limits" class="band sunk">
+  <h2><span class="h2-num mono">06</span>Where this falls short</h2>
   <ul class="limits" role="list">
-    <li><strong>Thirteen points is a small sample.</strong> Cluster-validity metrics on 13 observations are indicative, not conclusive. Treat the station ranking as the result and the cluster count as a modelling choice.</li>
-    <li><strong>AQI is already an aggregate.</strong> It compresses PM2.5, PM10, NO&#8322;, SO&#8322;, CO and O&#8323; into one number, so a station can be dirty in a way this analysis cannot see.</li>
-    <li><strong>Station siting is not controlled for.</strong> A roadside monitor and a rooftop monitor are not measuring the same thing, and I have no metadata to adjust for it.</li>
-    <li><strong>No causal claim.</strong> This identifies where the air is worse, not why. Source apportionment would need a different study and different data.</li>
-    <li><strong>Coverage gaps.</strong> Missing days were handled in the notebook rather than modelled; a station with sparser reporting carries slightly noisier features.</li>
+    <li><strong>Thirteen stations is a small sample.</strong> Cluster scores on 13 points give you a hint, not a conclusion. Treat the station ranking as the result and the group count as a choice I made.</li>
+    <li><strong>AQI is already a summary.</strong> It squashes PM2.5, PM10, NO&#8322;, SO&#8322;, CO and O&#8323; into one number, so a station can be dirty in a way this analysis cannot see at all.</li>
+    <li><strong>I know nothing about where the sensors sit.</strong> A monitor at road level and one on a rooftop are measuring different things, and I had no metadata to correct for it.</li>
+    <li><strong>This says where, and nothing about why.</strong> Working out what is producing the pollution needs different data and a different study.</li>
+    <li><strong>Missing days were filled in, not modelled.</strong> The notebook handles gaps in a simple way, so a station that reported less often has noisier numbers than the others.</li>
   </ul>
 </section>
 
 <section class="band cta">
-  <h2>Dig in</h2>
+  <h2>Have a look at the rest</h2>
   <div class="cta-row">
-    <a class="btn btn-primary" href="https://github.com/Vatsal057/AirQuality/blob/main/Air%20Quality%20Analysis.ipynb">Read the notebook →</a>
-    <a class="btn btn-ghost" href="https://github.com/Vatsal057/AirQuality">Repo, data and results ↗</a>
-    <a class="btn btn-ghost" href="results/pollution_hotspot_report.txt">Raw hotspot report ↗</a>
+    <a class="btn btn-solid" href="https://github.com/Vatsal057/AirQuality/blob/main/Air%20Quality%20Analysis.ipynb">Open the notebook</a>
+    <a class="btn" href="https://github.com/Vatsal057/AirQuality">Repo, data and results</a>
+    <a class="btn" href="results/pollution_hotspot_report.txt">The raw hotspot report</a>
   </div>
   <p class="note">
-    Data: CPCB CAAQMS portal and KSPCB, publicly published daily AQI. Analysis and
-    all figures by <a href="https://vatsal057.github.io">Vatsal Vaghasiya</a>. MIT licensed.
+    Data comes from the CPCB CAAQMS portal and KSPCB, both public. Analysis and
+    figures are mine. MIT licensed.
   </p>
 </section>
 
@@ -254,8 +273,8 @@
 
 <footer class="foot">
   <p class="mono">
-    <a href="https://vatsal057.github.io">← vatsal057.github.io</a>
-    <span aria-hidden="true">·</span>
+    <a href="https://vatsal057.github.io">vatsal057.github.io</a>
+    <span aria-hidden="true">/</span>
     <a href="https://github.com/Vatsal057/AirQuality">github</a>
   </p>
 </footer>

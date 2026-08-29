@@ -9,65 +9,66 @@
   var FIGURES = [
     {
       src: "results/visualizations/professional/05_geographic_map_professional.png",
-      title: "Stations in geographic context",
-      note: "The spatial story: the flagged stations are not randomly scattered."
+      title: "All stations on one map",
+      note: "Where the flagged stations sit relative to each other."
     },
     {
       src: "results/visualizations/final_correct/dbscan_map_with_noise.png",
-      title: "DBSCAN, noise points included",
-      note: "The stations DBSCAN refused to cluster. Those refusals are the hotspots."
+      title: "DBSCAN, with the left-out stations marked",
+      note: "The 8 stations DBSCAN would not put in any group."
     },
     {
       src: "results/visualizations/professional/01_model_comparison_professional.png",
-      title: "Model comparison",
-      note: "All three algorithms scored on the same internal validation metrics."
+      title: "The three models side by side",
+      note: "Same features, same metrics, three different answers."
     },
     {
       src: "results/visualizations/final_correct/kmeans_map_k4.png",
-      title: "K-Means assignment",
-      note: "Every station forced into a cluster — extremes get diluted into a broad group."
+      title: "K-Means groups",
+      note: "Every station ends up in a group here, which is what softens the extremes."
     },
     {
       src: "results/visualizations/final_correct/hierarchical_dendrogram_2clusters.png",
-      title: "Ward-linkage dendrogram",
-      note: "Where the merge distances jump is where the natural split sits."
+      title: "Hierarchical dendrogram",
+      note: "The big jump in merge distance is where I cut it."
     },
     {
       src: "results/visualizations/temporal/temporal_aqi_heatmap.png",
-      title: "Station × month heatmap",
-      note: "Winter is worse everywhere, but not equally worse everywhere."
+      title: "Station by month",
+      note: "Winter is worse at every station, by different amounts."
     },
     {
       src: "results/visualizations/professional/03_pca_clusters_professional.png",
-      title: "Feature space in 2D (PCA)",
-      note: "Six features projected down, purely to see whether the groups separate at all."
+      title: "Six features squashed into two (PCA)",
+      note: "Just to check whether the groups separate visually at all."
     },
     {
       src: "results/visualizations/professional/04_temporal_patterns_professional.png",
       title: "Seasonal patterns",
-      note: "The trend and winter-mean features, drawn out over the year."
+      note: "The winter average and trend features drawn out across the year."
     }
   ];
 
-  // Mean-AQI bands. Cutoffs follow the CPCB AQI categories that apply in this
-  // range (Good ≤50, Satisfactory ≤100, Moderate ≤200) rather than arbitrary quantiles.
+  // The real CPCB AQI category colours, so the map matches the scale the data
+  // is graded on. Cutoffs follow the CPCB bands that apply in this range:
+  // Good ≤50, Satisfactory ≤100, Moderate ≤200.
   var AQI_BANDS = [
-    { max: 50,       color: "#7BA05B", label: "≤ 50 good" },
-    { max: 75,       color: "#B9C471", label: "51–75" },
-    { max: 90,       color: "#D9A86C", label: "76–90" },
-    { max: Infinity, color: "#C0645C", label: "> 90" }
+    { max: 50,       color: "#55a84f", label: "≤ 50 good" },
+    { max: 75,       color: "#a3c853", label: "51–75" },
+    { max: 90,       color: "#f29c33", label: "76–90" },
+    { max: Infinity, color: "#e93f33", label: "above 90" }
   ];
   var UNHEALTHY_BANDS = [
-    { max: 10,       color: "#7BA05B", label: "< 10% of days" },
-    { max: 20,       color: "#B9C471", label: "10–20%" },
-    { max: 33,       color: "#D9A86C", label: "20–33%" },
-    { max: Infinity, color: "#C0645C", label: "> 33%" }
+    { max: 10,       color: "#55a84f", label: "under 10% of days" },
+    { max: 20,       color: "#a3c853", label: "10–20%" },
+    { max: 33,       color: "#f29c33", label: "20–33%" },
+    { max: Infinity, color: "#e93f33", label: "over 33%" }
   ];
   var CONSENSUS_COLORS = {
-    3: { color: "#C0645C", label: "all 3 algorithms" },
-    2: { color: "#D9A86C", label: "2 of 3" },
-    1: { color: "#B9C471", label: "1 of 3" },
-    0: { color: "#9BA6AD", label: "not flagged" }
+    3: { color: "#af2d24", label: "all 3 models" },
+    2: { color: "#f29c33", label: "2 of 3" },
+    1: { color: "#a3c853", label: "1 of 3" },
+    0: { color: "#9aa0a6", label: "none" }
   };
 
   var $ = function (sel) { return document.querySelector(sel); };
@@ -95,9 +96,9 @@
     } else {
       items = (mode === "unhealthy" ? UNHEALTHY_BANDS : AQI_BANDS);
     }
-    var head = mode === "consensus" ? "Flagged as a hotspot by"
-             : mode === "unhealthy" ? "Share of 2024 days rated unhealthy"
-             : "Yearly mean AQI";
+    var head = mode === "consensus" ? "models that flagged it"
+             : mode === "unhealthy" ? "days in unhealthy air"
+             : "average AQI for 2024";
     return "<span>" + head + "</span>" + items.map(function (b) {
       return '<span class="key"><span class="sw" style="background:' + b.color + '"></span>' + b.label + "</span>";
     }).join("");
@@ -105,18 +106,18 @@
 
   function popupHtml(st) {
     var flags = st.flaggedBy.length
-      ? "Flagged as a hotspot by " + st.flaggedBy.join(", ") + "."
-      : "Not flagged by any algorithm.";
+      ? "Flagged by " + st.flaggedBy.join(", ") + "."
+      : "No model flagged this one.";
     return '<div class="pop">' +
       "<h4>" + esc(st.station) + "</h4>" +
       '<div class="pop-net">' + esc(st.network) + " · 2024</div>" +
       "<dl>" +
-        "<dt>Mean AQI</dt><dd>" + st.meanAqi + "</dd>" +
-        "<dt>Peak AQI</dt><dd>" + st.maxAqi + "</dd>" +
+        "<dt>Average AQI</dt><dd>" + st.meanAqi + "</dd>" +
+        "<dt>Worst day</dt><dd>" + st.maxAqi + "</dd>" +
         "<dt>Unhealthy days</dt><dd>" + st.pctUnhealthy + "%</dd>" +
-        "<dt>7-day volatility</dt><dd>" + st.volatility + "</dd>" +
-        "<dt>Winter mean</dt><dd>" + st.winterAvg + "</dd>" +
-        "<dt>Trend slope</dt><dd>" + st.trendSlope + "</dd>" +
+        "<dt>Weekly swing</dt><dd>" + st.volatility + "</dd>" +
+        "<dt>Winter average</dt><dd>" + st.winterAvg + "</dd>" +
+        "<dt>Year trend</dt><dd>" + st.trendSlope + "</dd>" +
       "</dl>" +
       '<div class="pop-flag">' + esc(flags) + "</div>" +
     "</div>";
@@ -152,7 +153,7 @@
       var best = m.silhouette === bestSil;
       return "<tr" + (best ? ' class="is-best"' : "") + ">" +
         '<th scope="row">' + esc(m.name) +
-          (best ? '<span class="tag-win">best silhouette</span>' : "") + "</th>" +
+          (best ? '<span class="tag-win">best score</span>' : "") + "</th>" +
         '<td class="num">' + m.clusters + "</td>" +
         '<td class="num">' + m.noise + "</td>" +
         '<td class="num">' + m.silhouette.toFixed(3) + "</td>" +
