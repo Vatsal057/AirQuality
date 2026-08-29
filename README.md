@@ -1,10 +1,10 @@
 # Bangalore Air Quality Analysis & Pollution Hotspot Identification
 
-**[Explore the findings interactively →](https://vatsal057.github.io/AirQuality/)** — every station on a map, the model comparison, and the consensus hotspots.
+**[Explore the findings →](https://vatsal057.github.io/AirQuality/)** — every station on a map, the three models side by side, and the stations all of them agree on.
 
 Data-mining project that analyzes a year of daily AQI data from Bengaluru's CPCB/KSPCB monitoring stations (2024) to identify pollution hotspots using unsupervised machine learning.
 
-The headline: the worst and cleanest station sit **57 AQI points apart** on a yearly mean, so a city-wide average is close to meaningless. Two stations — RVCE-Mailasandra and Silk Board — are flagged as hotspots by all three algorithms. Silk Board hit AQI 500, the ceiling of the index.
+On a yearly mean the worst and cleanest stations sit **57 AQI points apart**, which is enough that a single city-wide average does not tell you much. Two stations, RVCE-Mailasandra and Silk Board, come out as hotspots under all three algorithms. Silk Board hit AQI 500 at one point, which is the top of the index.
 
 City-wide AQI averages hide how uneven urban pollution really is — a traffic junction like Silk Board and a leafy suburb like Jayanagar live in different micro-climates. This project clusters stations by their pollution behavior and flags the ones that deviate as hotspots.
 
